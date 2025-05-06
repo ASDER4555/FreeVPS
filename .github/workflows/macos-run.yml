@@ -1,0 +1,20 @@
+name: Run macOS VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Make script executable
+        run: chmod +x macos-run.sh
+
+      - name: Run macOS setup script
+        env:
+          MAC_USER_PASSWORD: ${{ secrets.MAC_USER_PASSWORD }}
+        run: |
+          ./macos-run.sh
